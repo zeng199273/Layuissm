@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.dao.mapper.MusicDao">  <!-- 必须写接口的全名 -->
+	<!-- 查询所有数据-->
+	<select id="findAll" resultType="cn.entity.Music">
+		select * from music
+	</select>
+	<!-- 模糊查询 -->
+	<select id="findByNameMusic" resultType="cn.entity.Music">
+		select * from music where musicName like "%"#{musicName}"%"
+	</select>
+	<!-- 删除一条数据 -->
+	<delete id="delMusic" parameterType="int">
+		delete from music where id=#{id}
+	</delete>
+	<!-- 添加数据 -->
+	<insert id="addMusic" parameterType="cn.entity.Music">
+		insert into music(musicName,singerId,musicURL,typeId,photo)
+		values(#{musicName},#{singerId},#{musicURL},#{typeId},#{photo})
+	</insert>
+	<!-- 查询一条数据 -->
+	<select id="findMusicById" resultType="cn.entity.Music" parameterType="int">
+		select * from music where id=#{id}
+	</select>
+	<!-- 修改数据 -->
+	<update id="updateMusic" parameterType="cn.entity.Music">
+		update music set musicName=#{musicName},singerId=#{singerId},
+		musicURL=#{musicURL},typeId=#{typeId},photo=#{photo} where id=#{id}
+	</update>
+</mapper>
